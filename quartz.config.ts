@@ -10,7 +10,7 @@ const config: QuartzConfig = {
       provider: "google",
       tagId: "G-HE3XZZJECH"
     },
-    baseUrl: "idravajra.github.io/cyber-samadhi/",
+    baseUrl: "indravajra.github.io/cyber-samadhi/",
     ignorePatterns: ["**/private", "**/templates", ".obsidian", "**/bin", "**/journals", "**/projects", "**/inbox", "**/canvas", "**/meta", "**/unsorted", "**/excerpts", "**/fortunes", "**/phrases", "**/sayings", "**/highlights", "**/articles"],
     defaultDateType: "created",
     theme: {
