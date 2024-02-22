@@ -27,7 +27,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Darkmode(),
     Component.Search(),
-    Component.DesktopOnly(Component.Explorer({
+    Component.DesktopOnly(Component.TagExplorer({
       mapFn: (node) => {
         // dont change name of root node
         if (node.depth > 0) {
@@ -35,7 +35,7 @@ export const defaultContentPageLayout: PageLayout = {
           if (node.file) {
             node.displayName = "📄 " + node.displayName
           } else {
-            node.displayName = "📁 " + node.displayName
+            node.displayName = "#" + node.displayName
           }
         }
       },
