@@ -45,5 +45,4 @@ export {
   NotFound,
   Breadcrumbs,
   TagExplorer
-
 }

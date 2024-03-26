@@ -1,13 +1,12 @@
-import { QuartzComponentConstructor, QuartzComponentProps } from "../types"
+import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
 import path from "path"
 
 import style from "../styles/listPage.scss"
 import { PageList } from "../PageList"
-import { _stripSlashes, simplifySlug } from "../../util/path"
+import { stripSlashes, simplifySlug } from "../../util/path"
 import { Root } from "hast"
-import { pluralize } from "../../util/lang"
 import { htmlToJsx } from "../../util/jsx"
-import { i18n } from "../../i18n/i18next"
+import { i18n } from "../../i18n"
 
 interface FolderContentOptions {
   /**
@@ -23,11 +22,11 @@ const defaultOptions: FolderContentOptions = {
 export default ((opts?: Partial<FolderContentOptions>) => {
   const options: FolderContentOptions = { ...defaultOptions, ...opts }
 
-  function FolderContent(props: QuartzComponentProps) {
+  const FolderContent: QuartzComponent = (props: QuartzComponentProps) => {
     const { tree, fileData, allFiles, cfg } = props
-    const folderSlug = _stripSlashes(simplifySlug(fileData.slug!))
+    const folderSlug = stripSlashes(simplifySlug(fileData.slug!))
     const allPagesInFolder = allFiles.filter((file) => {
-      const fileSlug = _stripSlashes(simplifySlug(file.slug!))
+      const fileSlug = stripSlashes(simplifySlug(file.slug!))
       const prefixed = fileSlug.startsWith(folderSlug) && fileSlug !== folderSlug
       const folderParts = folderSlug.split(path.posix.sep)
       const fileParts = fileSlug.split(path.posix.sep)
@@ -54,8 +53,9 @@ export default ((opts?: Partial<FolderContentOptions>) => {
         <div class="page-listing">
           {options.showFolderCount && (
             <p>
-              {pluralize(allPagesInFolder.length, i18n(cfg.locale, "common.item"))}{" "}
-              {i18n(cfg.locale, "folderContent.underThisFolder")}.
+              {i18n(cfg.locale).pages.folderContent.itemsUnderFolder({
+                count: allPagesInFolder.length,
+              })}
             </p>
           )}
           <div>
